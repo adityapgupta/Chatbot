@@ -1,0 +1,142 @@
+{"intents": [
+  {"tag": "add",
+   "patterns": ["add","plus","sum","addition","added"],
+   "responses": ["add"]
+  },
+  {"tag": "sub1",
+   "patterns": ["subtract from","subtraction","subtracted from","remove"],
+   "responses": ["sub1"]
+  },
+  {"tag": "sub2",
+   "patterns": ["minus","difference","reduce by"],
+   "responses": ["sub2"]
+  },
+  {"tag": "multiply",
+   "patterns": ["multiply","multiplied","product","multiplication","times","into"],
+   "responses": ["multiply"]
+  },
+  {"tag": "divide",
+   "patterns": ["divide","divided","division","upon","by","quotient"],
+   "responses": ["divide"]
+  },
+  {"tag": "sqrt",
+   "patterns": ["sqrt","square root","root"],
+   "responses": ["sqrt"]
+  },
+  {"tag": "exponent",
+   "patterns": ["exponent","raise to","power","^"],
+   "responses": ["exponent"]
+  },
+  {"tag": "log",
+   "patterns": ["log","logarithm","base"],
+   "responses": ["log"]
+  },
+  {"tag": "ln",
+   "patterns": ["ln","log","natural","logarithm"],
+   "responses": ["ln"]
+  },
+  {"tag": "factorial",
+   "patterns": ["factorial","fact","!"],
+   "responses": ["factorial"]
+  },
+  {"tag": "hcf",
+   "patterns": ["hcf","gcd","highest common factor","greatest common divisor"],
+   "responses": ["hcf"]
+  },
+  {"tag": "lcm",
+   "patterns": ["lcm","least common multiple"],
+   "responses": ["lcm"]
+  },
+  {"tag": "d_r",
+   "patterns": ["d_r","degrees to radians"],
+   "responses": ["d_r"]
+  },
+  {"tag": "r_d",
+   "patterns": ["r_d","radians to degrees"],
+   "responses": ["r_d"]
+  },
+  {"tag": "sin",
+   "patterns": ["sin","sine"],
+   "responses": ["sin"]
+  },
+  {"tag": "cos",
+   "patterns": ["cos","cosine"],
+   "responses": ["cos"]
+  },
+  {"tag": "tan",
+   "patterns": ["tan","tangent"],
+   "responses": ["tan"]
+  },
+  {"tag": "cosec",
+   "patterns": ["cosec","cosecant"],
+   "responses": ["cosec"]
+  },
+  {"tag": "sec",
+   "patterns": ["sec","secant"],
+   "responses": ["sec"]
+  },
+  {"tag": "cot",
+   "patterns": ["cot","cotangent"],
+   "responses": ["cot"]
+  },
+  {"tag": "evaluate",
+   "patterns": ["+","-","*","/","(",")"],
+   "responses": ["evaluate"]
+  },
+  {"tag": "youtube",
+   "patterns": ["play","on","youtube","yt"],
+   "responses": ["youtube"]
+  },
+  {"tag": "wiki",
+   "patterns": ["wikipedia","wiki","search","for"],
+   "responses": ["wiki"]
+  },
+  {"tag": "google",
+   "patterns": ["google", "search", "about", "chacha", "baba", "ask", "for", "to"],
+   "responses": ["google"]
+  },
+  {"tag": "website",
+   "patterns": ["open", "website", "url", "web", "browse"],
+   "responses": ["website"]
+  },
+  {"tag": "website_inc",
+   "patterns": ["incognito", "inc", "private", "safe"],
+   "responses": ["website_inc"]
+  },
+  {"tag": "email",
+   "patterns": ["email", "gmail", "mail", "send", "open"],
+   "responses": ["email"]
+  },
+  {"tag": "whatsapp",
+   "patterns": ["whatsapp", "send", "whats", "app", "message", "open"],
+   "responses": ["whatsapp"]
+  },
+  {"tag": "date",
+   "patterns": ["date","today","today's"],
+   "responses": ["date"]
+  },
+  {"tag": "day",
+   "patterns": ["day","today","today's"],
+   "responses": ["day"]
+  },
+  {"tag": "end",
+   "patterns": ["end","quit","close","shut down","exit"],
+   "responses": ["end"]
+  },
+  {"tag": "greetings",
+   "patterns": ["hello", "hey", "hi", "good day", "greetings", "what's up?", "how is it going?"],
+   "responses": ["Hello!", "Hey!", "What can I do for you?"]
+  },
+   {"tag": "age",
+   "patterns": ["how old", "what is your age", "how old are you", "age?"],
+   "responses": ["I was born on 16th April, 2021"]
+  },
+  {"tag": "goodbye",
+   "patterns": ["cya", "See you later", "Goodbye", "I am leaving", "Have a good day", "bye", "see ya"],
+   "responses": ["Talk to you later", "Goodbye!"]
+  },
+  {"tag": "name",
+   "patterns": ["what is your name", "what should i call you", "whats your name?", "who are you?"],
+   "responses": ["You can call me TARS!", "I'm TARS!"]
+  }
+]}
