@@ -1,4 +1,3 @@
-import sys
 import random
 import json
 import pickle
@@ -7,12 +6,12 @@ import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
 
-from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.layers import Dense, Dropout
-from tensorflow.python.keras.optimizers import gradient_descent_v2
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+from keras.optimizers import SGD
 
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open("intents.json")).read()
+intents = json.loads(open("C:/Github_repos/Chatbot/intents.json").read())
 
 words = []
 classes = []
@@ -32,8 +31,8 @@ words = sorted(set(words))
 
 classes = sorted(set(classes))
 
-pickle.dump(words, open("words.pkl", "wb"))
-pickle.dump(classes, open("classes.pkl", "wb"))
+pickle.dump(words, open("C:/Github_repos/Chatbot/words.pkl", "wb"))
+pickle.dump(classes, open("C:/Github_repos/Chatbot/classes.pkl", "wb"))
 
 training = []
 output_empty = [0] * len(classes)
@@ -50,7 +49,7 @@ for document in documents:
     training.append([bag, output_row])
 
 random.shuffle(training)
-training = np.array(training)
+training = np.array(training, dtype="object")
 
 train_x = list(training[:, 0])
 train_y = list(training[:, 1])
@@ -62,9 +61,9 @@ model.add(Dense(64, activation="relu"))
 model.add(Dropout(0.5))
 model.add(Dense(len(train_y[0]), activation="softmax"))
 
-sgd = gradient_descent_v2.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+sgd = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 model.compile(loss="categorical_crossentropy", optimizer=sgd, metrics=["accuracy"])
 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=1000, batch_size=5, verbose=1)
-model.save("chatbot_model.model", hist)
+model.save("C:/Github_repos/Chatbot/chatbot_model.model", hist)
 print("Done")

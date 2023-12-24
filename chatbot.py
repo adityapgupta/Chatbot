@@ -17,15 +17,15 @@ import pyttsx3
 import speech_recognition as sr
 from googlesearch import search
 from nltk.stem import WordNetLemmatizer
-from tensorflow.python.keras.models import load_model
+from keras.models import load_model
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAIN CODE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open("intents.json").read())
+intents = json.loads(open("C:/Github_repos/Chatbot/intents.json").read())
 
-words = pickle.load(open('words.pkl', "rb"))
-classes = pickle.load(open('classes.pkl', "rb"))
-model = load_model("chatbot_model.model")
+words = pickle.load(open('C:/Github_repos/Chatbot/words.pkl', "rb"))
+classes = pickle.load(open('C:/Github_repos/Chatbot/classes.pkl', "rb"))
+model = load_model("C:/Github_repos/Chatbot/chatbot_model.model")
 
 
 def clean_up_sentence(sentence):

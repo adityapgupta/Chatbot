@@ -127,7 +127,7 @@
    "patterns": ["hello", "hey", "hi", "good day", "greetings", "what's up?", "how is it going?"],
    "responses": ["Hello!", "Hey!", "What can I do for you?"]
   },
-   {"tag": "age",
+  {"tag": "age",
    "patterns": ["how old", "what is your age", "how old are you", "age?"],
    "responses": ["I was born on 16th April, 2021"]
   },
