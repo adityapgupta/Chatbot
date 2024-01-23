@@ -92,16 +92,12 @@
    "responses": ["wiki"]
   },
   {"tag": "google",
-   "patterns": ["google", "search", "about", "chacha", "baba", "ask", "for", "to"],
+   "patterns": ["google", "search", "about", "ask", "for", "to"],
    "responses": ["google"]
   },
   {"tag": "website",
    "patterns": ["open", "website", "url", "web", "browse"],
    "responses": ["website"]
-  },
-  {"tag": "website_inc",
-   "patterns": ["incognito", "inc", "private", "safe"],
-   "responses": ["website_inc"]
   },
   {"tag": "email",
    "patterns": ["email", "gmail", "mail", "send", "open"],

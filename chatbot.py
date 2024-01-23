@@ -46,7 +46,7 @@ def bag_of_words(sentence):
 
 def predict_class(sentence):
     bow = bag_of_words(sentence)
-    res_1 = model.predict(np.array([bow]))[0]
+    res_1 = model.predict(np.array([bow]), verbose=None)[0]
     error_threshold = 0.25
     results = [[b, r] for b, r in enumerate(res_1) if r > error_threshold]
 
@@ -90,14 +90,12 @@ def extract_from_text(n):
 def youtube(n):
     yt_words = ["play", "on", "youtube", "yt"]
     yt_song = " ".join(d for d in n.split(" ") if d.lower() not in yt_words)
-    yt_text = "Playing " + yt_song + " on YouTube..."
+    yt_text = "Playing " + yt_song + " on YouTube...\n"
     print(yt_text)
     engine.say(yt_text)
     engine.runAndWait()
     pywhatkit.playonyt(yt_song)
-    yt_res = "\nWhat else can I do for you?"
-    return yt_res
-
+    
 
 def wiki(n):
     wiki_words = ["wikipedia", "wiki", "search", "for"]
@@ -111,21 +109,18 @@ def wiki(n):
     word_list = wrapper.wrap(text=search_results)
     for element in word_list:
         print(element)
-    wiki_res = "\nWhat else can I do for you?"
-    return wiki_res
 
 
 def google_search(n):
-    google_words = ["google", "about", "search", "chacha", "baba", "ask", "for", "to"]
+    google_words = ["google", "about", "search", "ask", "for", "to"]
     query = " ".join(f for f in n.split(" ") if f.lower() not in google_words)
     google_text = "Here are some links I found on google..."
     print(google_text)
     engine.say(google_text)
     engine.runAndWait()
-    for j in search(query):
+    for j in search(query, num=5, stop=5, pause=2):
         print(j)
-    google_res = "\nWhat else can I do for you?"
-    return google_res
+    print()
 
 
 def website(_):
@@ -135,19 +130,7 @@ def website(_):
     engine.say(website_text)
     engine.runAndWait()
     os.system("start \"\" " + url)
-    website_res = "\nWhat else can I do for you?"
-    return website_res
-
-
-def website_inc(_):
-    url = input("Enter the website url: ")
-    website_inc_text = "Opening website in incognito mode..."
-    print(website_inc_text)
-    engine.say(website_inc_text)
-    engine.runAndWait()
-    os.system("\"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe\" -incognito " + url)
-    website_inc_res = "\nWhat else can I do for you?"
-    return website_inc_res
+    print()
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -289,17 +272,17 @@ def end():
 
 def date_today():
     today_date = date.today().strftime("%d/%m/%Y")
-    date_res = "Today's date is: " + today_date + "\n\nWhat else can I do for you?"
+    date_res = "Today's date is: " + today_date
     return date_res
 
 
 def day_today():
     today_day = datetime.now()
-    day_res = "Today is " + today_day.strftime("%A") + "\n\nWhat else can I do for you?"
+    day_res = "Today is " + today_day.strftime("%A")
     return day_res
 
 
-def email():
+def email(): 
     email_from = input("Enter your email address: ")
     email_password = input("Enter your password: ")
     email_to = input("Enter the receiver's email address: ")
@@ -310,31 +293,30 @@ def email():
     my_email["to"] = email_to
     my_email["subject"] = email_subject
     my_email.set_content(email_body)
-    with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
+    with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
         smtp.ehlo()
         smtp.starttls()
         smtp.login(email_from, email_password)
         smtp.send_message(my_email)
-    email_res = "Email sent" + "\nWhat else can I do for you?"
+    email_res = "Email sent"
     return email_res
 
 
 def whatsapp():
-    whats_no = input("Enter the mobile number: ")
+    whats_no = input("Enter the mobile number (with country code): ")
     whats_msg = input("Enter the message: ")
     updated = (datetime.now() + timedelta(seconds=20)).strftime('%H:%M:%S')
     time_list = [int(a) for a in updated.split(":")]
     hour_set = time_list[0]
     minute_set = time_list[1] + 1
-    pywhatkit.sendwhatmsg(whats_no, whats_msg, hour_set, minute_set, wait_time=10)
-
-    whatsapp_res = "Message sent" + "\nWhat else can I do for you?"
+    pywhatkit.sendwhatmsg(whats_no, whats_msg, hour_set, minute_set, wait_time=20)
+    whatsapp_res = "Message sent"
     return whatsapp_res
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% OPERATION DICTIONARIES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-operations2 = {"youtube": youtube, "wiki": wiki, "google": google_search, "website": website, "website_inc": website_inc}
+operations2 = {"youtube": youtube, "wiki": wiki, "google": google_search, "website": website}
 
 # mathematical operations
 operations1 = {"evaluate": evaluate, "add": add, "sub1": sub1, "sub2": sub2, "multiply": multiply, "divide": divide, "sqrt": sqrt, "exponent": exponent, "log": log, "ln": ln, "factorial": factorial, "hcf": hcf, "lcm": lcm, "d_r": d_r, "r_d": r_d, "sin": sin, "cos": cos, "tan": tan, "cosec": cosec, "sec": sec, "cot": cot}
@@ -365,23 +347,27 @@ def main():
         ints = predict_class(message)
         res = get_response(ints, intents)
 
-        if res in operations2:
-            final_res = operations2[res](message)
+        try:
+            if res in operations2:
+                final_res = operations2[res](message)
 
-        elif res in operations1:
-            numbers = extract_from_text(message)
-            final_res = operations1[res](numbers)
+            elif res in operations1:
+                numbers = extract_from_text(message)
+                final_res = operations1[res](numbers)
 
-        elif res in operations0:
-            final_res = operations0[res]()
+            elif res in operations0:
+                final_res = operations0[res]()
 
-        else:
-            final_res = res
+            else:
+                final_res = res
 
-        print(final_res, "\n")
-        engine.say(final_res)
-        engine.runAndWait()
-
+        except:
+            final_res = "Task failed"
+        
+        if final_res != None:
+                print(final_res, "\n")
+                engine.say(final_res)
+                engine.runAndWait()
 
 engine = pyttsx3.init()
 main()
